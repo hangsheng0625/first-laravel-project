@@ -18,13 +18,7 @@ Route::get('/posts', function () {
 });
 
 // Show individual post
-Route::get('posts/{post}', function ($id) {
-    $post = Post::find($id);
-
-    if (!$post) {
-        return redirect('/')->with('error', 'Post not found.');
-    }
-
+Route::get('posts/{post}', function (Post $post) {
     return view('post-content', [
         'post' => $post,
     ]);
