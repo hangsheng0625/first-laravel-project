@@ -37,6 +37,7 @@
 </head>
 <body>
     <article>
+    <p>Category: {{ $post->category->name }}</a></p>
     {!! $post->content !!}
     </article>
     <a href="/posts">Back to Posts</a>
