@@ -12,7 +12,7 @@
         @foreach ($posts as $post)
             <article class="post-preview">
                 <h2>
-                    <a href="/posts/{{ $post['slug'] }}">
+                    <a href="/posts/{{ $post['id'] }}">
                         {{ ucwords(str_replace('-', ' ', $post['title'])) }}
                     </a>
                 </h2>

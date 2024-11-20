@@ -37,7 +37,7 @@
 </head>
 <body>
     <article>
-        {!! $post !!}
+    {!! $post->content !!}
     </article>
     <a href="/posts">Back to Posts</a>
 </body>

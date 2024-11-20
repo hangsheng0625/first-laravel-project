@@ -18,8 +18,8 @@ Route::get('/posts', function () {
 });
 
 // Show individual post
-Route::get('posts/{post}', function ($slug) {
-    $post = Post::find($slug);
+Route::get('posts/{post}', function ($id) {
+    $post = Post::find($id);
 
     if (!$post) {
         return redirect('/')->with('error', 'Post not found.');
