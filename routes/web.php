@@ -1,40 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\File;
+use App\Models\Post;
 
 // Home page ("Welcome to my Blog")
 Route::get('/', function () {
     return view('my-blog');
 });
 
-// Show all post titles
+// Show all posts titles
 Route::get('/posts', function () {
-    $posts = File::files(resource_path('posts'));
-
-    $posts = array_map(function ($file) {
-        return [
-            'slug' => basename($file, '.html'),
-            'title' => basename($file, '.html') // Can be improved to extract meaningful titles
-        ];
-    }, $posts);
+    $posts = Post::all();
 
     return view('post-title', [
-        'posts' => $posts
+        'posts' => $posts,
     ]);
 });
 
 // Show individual post
 Route::get('posts/{post}', function ($slug) {
-    $path = resource_path("posts/{$slug}.html");
+    $post = Post::find($slug);
 
-    if (!file_exists($path)) {
-        return redirect('/');
+    if (!$post) {
+        return redirect('/')->with('error', 'Post not found.');
     }
 
-    $post = file_get_contents($path);
-
     return view('post-content', [
-        'post' => $post
+        'post' => $post,
     ]);
 });
