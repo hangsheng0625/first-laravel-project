@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,5 +24,21 @@
     <p>This is a sample post page using Blade templating in Laravel.</p>
     </article>
     <a href="/">Back to Home</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+    <article>
+        {!! $post !!}
+    </article>
+    <a href="/posts">Back to Posts</a>
 </body>
 </html>
