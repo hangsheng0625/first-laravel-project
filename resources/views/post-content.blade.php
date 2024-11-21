@@ -37,8 +37,8 @@
 </head>
 <body>
     <article>
-    <p>Category: {{ $post->category->name }}</a></p>
-    {!! $post->content !!}
+        <p>By <a href="#"> {{ $post->user->name }} </a> in {{ $post->category->name }}</p>
+        <p>{!! $post->content !!}</p>
     </article>
     <a href="/posts">Back to Posts</a>
 </body>
