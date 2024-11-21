@@ -27,19 +27,14 @@
 </body>
 </html> -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
-    <link rel="stylesheet" href="/app.css">
-</head>
-<body>
+@extends('components.layout')
+
+
+@section('content')
     <article>
-        <p>By <a href="#"> {{ $post->user->name }} </a> in {{ $post->category->name }}</p>
-        <p>{!! $post->content !!}</p>
+        <p>By <a href="#">{{ $post->user->name }}</a> in {{ $post->category->name }}</p>
+        {!! $post->content !!}
     </article>
+
     <a href="/posts">Back to Posts</a>
-</body>
-</html>
+@endsection

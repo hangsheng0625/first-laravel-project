@@ -2,15 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\Category;
 
 // Home page ("Welcome to my Blog")
 Route::get('/', function () {
-    return view('my-blog');
+    $posts = Post::latest()->get(); // Get latest posts for the home page
+    return view('post-title', [
+        'posts' => $posts,
+    ]);
 });
 
 // Show all posts titles
 Route::get('/posts', function () {
-    $posts = Post::all();
+    $posts = Post::latest()->get();
 
     return view('post-title', [
         'posts' => $posts,
@@ -18,12 +22,6 @@ Route::get('/posts', function () {
 });
 
 // Show individual post
-Route::get('posts/{post}', function (Post $post) {
-    return view('post-content', [
-        'post' => $post,
-    ]);
-});
-
 Route::get('posts/{post}', function (Post $post) {
     return view('post-content', [
         'post' => $post->load('category'), // Eager load the category
