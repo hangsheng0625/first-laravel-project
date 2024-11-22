@@ -6,7 +6,14 @@ use App\Models\Category;
 
 // Home page ("Welcome to my Blog")
 Route::get('/', function () {
-    $posts = Post::latest()->get(); // Get latest posts for the home page
+    $posts = Post::with(['category', 'user'])->latest()->get();
+
+    // dd([
+    //     'post_count' => $posts->count(),
+    //     'first_post' => $posts->first(),
+    //     'posts_data' => $posts->toArray()
+    // ]);
+    
     return view('post-title', [
         'posts' => $posts,
     ]);
