@@ -5,9 +5,17 @@ use App\Models\Post;
 use App\Models\Category;
 
 // Home page ("Welcome to my Blog")
-Route::get('/', function () {    
+Route::get('/', function () { 
+    $posts = Post::latest();
+
+    if(request('search')){
+        $posts
+            ->where('title', 'like', '%'.request('search').'%')
+            ->orWhere('content', 'like', '%'.request('search').'%');
+    }
+
     return view('post-title', [
-        'posts' => Post::latest()-> get(),
+        'posts' => $posts->get(),
         'categories'=> Category::all(),
     ]);
 });
