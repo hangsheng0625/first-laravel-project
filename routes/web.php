@@ -29,9 +29,10 @@ Route::get('/posts', function () {
 });
 
 // Show individual post
-Route::get('posts/{post}', function (Post $post) {
+Route::get('posts/{post:slug}', function (Post $post) {
+    // dd($post);
     return view('post-content', [
-        'post' => $post->load('category'), // Eager load the category
+        'post' => $post->load(['category', 'user']),
     ]);
 });
 
