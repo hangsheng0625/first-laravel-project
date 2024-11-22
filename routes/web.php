@@ -5,17 +5,10 @@ use App\Models\Post;
 use App\Models\Category;
 
 // Home page ("Welcome to my Blog")
-Route::get('/', function () {
-    $posts = Post::with(['category', 'user'])->latest()->get();
-
-    // dd([
-    //     'post_count' => $posts->count(),
-    //     'first_post' => $posts->first(),
-    //     'posts_data' => $posts->toArray()
-    // ]);
-    
+Route::get('/', function () {    
     return view('post-title', [
-        'posts' => $posts,
+        'posts' => Post::latest()-> get(),
+        'categories'=> Category::all(),
     ]);
 });
 
@@ -39,6 +32,9 @@ Route::get('posts/{post:slug}', function (Post $post) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('category-posts', [
         'category' => $category,
-        'posts' => $category->posts,
+        'posts' => $category->posts()->with(['category', 'user'])->latest()->get(),
+        'currentCategory' => $category,
     ]);
 });
+
+
